@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>See all the messages for {{ user.first_name }}</h1>
-  <p>
-    {{message.content}}
-    <br>
-    <a href="{{url_for('messages_edit', message_id=message.id)}}">Edit a message!</a>
-    <form method="POST" action="{{url_for('messages_show', message_id=message.id)}}?_method=DELETE">
-      <button>X</button>
+  <div class="jumbotron">
+    <h4 class="display-4">
+      {{message.content}}
+    </h4>
+    <p class="d-flex justify-content-end"><em>- {{ message.user.first_name }} {{ message.user.last_name }}</em></p>
+  </div>
+  <div class="d-flex justify-content-end">
+    <a href="{{ url_for('messages_index', user_id=message.user.id) }}" class="btn btn-info mr-2">Go back to message list</a>
+    <a href="{{url_for('messages_edit', message_id=message.id)}}" class="btn btn-success mr-2">Edit</a>
+    <form class="delete-btn" action="{{url_for('messages_show', message_id=message.id)}}?_method=DELETE" method="POST">
+      <input type="submit" class="btn btn-danger" value="Delete"/>
     </form>
-  </p>
+  </div>
 {% endblock %}

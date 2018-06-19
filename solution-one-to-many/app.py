@@ -8,6 +8,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://localhost/users_messages"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = 'ihaveasecret'
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 modus = Modus(app)
 db = SQLAlchemy(app)
 toolbar = DebugToolbarExtension(app)

@@ -1,16 +1,31 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <a href="{{url_for('messages_new', user_id=user.id)}}">Add a new message!</a>
-  <h1>See all the messages for {{ user.first_name }}</h1>
-  {% for message in user.messages %}
-  <p>
-    {{message.content}}
-    <br>
-    <a href="{{url_for('messages_edit', message_id=message.id)}}">Edit a message!</a>
-    <form method="POST" action="{{url_for('messages_show', message_id=message.id)}}?_method=DELETE">
-      <button>X</button>
-    </form>
-  </p>
-  {% endfor %}
+  
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>{{ user.first_name }}'s messages</h1>
+    <a href="{{url_for('messages_new', user_id=user.id)}}" class="btn btn-primary" >Add a new message!</a>
+  </div>
+  <table class="table table-striped table-hover mt-5">
+    <thead>
+      <tr>
+        <th>Message Content</th>
+        <th class="text-right">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for message in user.messages %}
+        <tr>
+          <td>{{ message.content }}</td>
+          <td class="text-right">
+            <a href="{{url_for('messages_show', message_id=message.id)}}" class="btn btn-primary btn-sm">Show</a>
+            <a href="{{url_for('messages_edit', message_id=message.id)}}" class="btn btn-success btn-sm">Edit</a>
+            <form class="delete-btn" action="{{url_for('messages_show', message_id=message.id)}}?_method=DELETE" method="POST">
+              <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 {% endblock %}
