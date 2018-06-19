@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>{{ user.first_name }} {{ user.last_name }} </h1>
-  <img src="{{ user.image_url }}" alt="{{ user.first_name }} {{ user.last_name }}" >
-  <a href="{{ url_for('users_edit', user_id=user.id)}}">Edit a user!</a>
-  <a href="{{ url_for('users_index') }}">Go back</a>
-  <form action="{{url_for('users_show', user_id=user.id)}}?_method=DELETE" method="POST">
-    <input type="submit" value="X">
-  </form>
+  <div class="row">
+    <div class="col-sm-4 col-12">
+      <img src="{{ user.image_url }}" alt="{{ user.first_name }} {{ user.last_name }}" class="user-photo">
+    </div>
+    <div class="col-sm-8 col-12">
+      <h1>{{ user.first_name }} {{ user.last_name }} </h1>
+      <a href="{{url_for('users_index')}}" class="btn btn-primary btn-sm">Go Back</a>
+      <a href="{{url_for('users_edit', user_id=user.id)}}" class="btn btn-success btn-sm">Edit</a>
+      <form class="delete-btn" action="{{url_for('users_show', user_id=user.id)}}?_method=DELETE" method="POST">
+        <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+      </form>
+      <a href="{{ url_for('messages_index', user_id=user.id) }}" class="btn btn-info btn-sm">See Messages</a>
+    </div>
+  </div>
 {% endblock %}

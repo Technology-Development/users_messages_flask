@@ -86,6 +86,7 @@ def users_update(user_id):
     found_user = User.query.get(user_id)
     found_user.first_name = request.form['first_name']
     found_user.last_name = request.form['last_name']
+    found_user.image_url = request.form['image_url']
     db.session.add(found_user)
     db.session.commit()
     return redirect(url_for('users_index'))
