@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>See all the users!</h1>
+  <table class="table table-striped table-border table-hover">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Message Count</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+          <td>{{ user.messages.count() }}</td>
+          <td>
+            <a href="{{url_for('users_show', user_id=user.id)}}" class="btn btn-primary btn-sm">Show</a>
+            <a href="{{url_for('users_edit', user_id=user.id)}}" class="btn btn-success btn-sm">Edit</a>
+            <form class="delete-btn" action="{{url_for('users_show', user_id=user.id)}}?_method=DELETE" method="POST">
+              <input type="submit" class="btn btn-danger btn-sm" value="Delete">
+            </form>
+            <a href="{{ url_for('messages_index', user_id=user.id) }}" class="btn btn-info btn-sm">See Messages</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endblock %}

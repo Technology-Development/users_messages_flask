@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ user.first_name }} {{ user.last_name }} </h1>
+  <img src="{{ user.image_url }}" alt="{{ user.first_name }} {{ user.last_name }}" >
+  <a href="{{ url_for('users_edit', user_id=user.id)}}">Edit a user!</a>
+  <a href="{{ url_for('users_index') }}">Go back</a>
+  <form action="{{url_for('users_show', user_id=user.id)}}?_method=DELETE" method="POST">
+    <input type="submit" value="X">
+  </form>
+{% endblock %}

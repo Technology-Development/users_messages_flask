@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>See all the messages for {{ user.first_name }}</h1>
+  <p>
+    {{message.content}}
+    <br>
+    <a href="{{url_for('messages_edit', message_id=message.id)}}">Edit a message!</a>
+    <form method="POST" action="{{url_for('messages_show', message_id=message.id)}}?_method=DELETE">
+      <button>X</button>
+    </form>
+  </p>
+{% endblock %}
