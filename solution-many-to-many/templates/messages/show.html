@@ -6,6 +6,11 @@
       {{message.content}}
     </h4>
     <p class="d-flex justify-content-end"><em>- {{ message.user.first_name }} {{ message.user.last_name }}</em></p>
+    <div class="d-flex justify-content-end">
+      {% for tag in message.tags %}
+        <a href="{{ url_for('tags_show', tag_id=tag.id) }}" class="badge badge-pill badge-warning ml-2">{{ tag.name }}</a>
+      {% endfor %}
+    </div>
   </div>
   <div class="d-flex justify-content-end">
     <a href="{{ url_for('messages_index', user_id=message.user.id) }}" class="btn btn-info mr-2">Go back to message list</a>

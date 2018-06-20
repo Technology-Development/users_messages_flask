@@ -93,13 +93,16 @@ def messages_index(user_id):
 def messages_new(user_id):
     """Show a form to create a new message for a specific user"""
     found_user = User.query.get_or_404(user_id)
-    return render_template('messages/new.html', user=found_user)
+    return render_template(
+        'messages/new.html', user=found_user, tags=Tag.query.all())
 
 
 @app.route('/users/<int:user_id>/messages', methods=["POST"])
 def messages_create(user_id):
     """Handle form submission for creating a new message for a specific user"""
     new_message = Message(content=request.form.get('content'), user_id=user_id)
+    tag_ids = [int(num) for num in request.form.getlist("tags")]
+    new_message.tags = Tag.query.filter(Tag.id.in_(tag_ids))
     db.session.add(new_message)
     db.session.commit()
     return redirect(url_for('messages_index', user_id=user_id))
@@ -116,7 +119,8 @@ def messages_show(message_id):
 def messages_edit(message_id):
     """Show a form to edit an existing message"""
     found_message = Message.query.get_or_404(message_id)
-    return render_template('messages/edit.html', message=found_message)
+    return render_template(
+        'messages/edit.html', message=found_message, tags=Tag.query.all())
 
 
 @app.route('/messages/<int:message_id>', methods=["PATCH"])
@@ -124,6 +128,8 @@ def messages_update(message_id):
     """Handle form submission for updating an existing message"""
     found_message = Message.query.get_or_404(message_id)
     found_message.content = request.form.get('content')
+    tag_ids = [int(num) for num in request.form.getlist("tags")]
+    found_message.tags = Tag.query.filter(Tag.id.in_(tag_ids))
     user = found_message.user
     db.session.add(found_message)
     db.session.commit()
@@ -203,6 +209,3 @@ def tags_destroy(tag_id):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
-
-
-# update message routes

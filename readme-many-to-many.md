@@ -10,6 +10,12 @@ Add another resource to your users and messages application! Create a resource f
 4.  When you create a tag, you should be able to add existing messages to it.
 5.  When you edit a tag, you should be able to modify the messages associated to it.
 
+### Bonus: Database performance
+
+If you add a bunch of data to the model solution, you should see that some pages require a lot of database querying in order to render. This means that the app probably won't scale very well as the database grows.
+
+The underlying issue here is related to a family of problems known as _N + 1 query problems_. You can read a bit about these issues [here](https://www.rithmschool.com/courses/flask-fundamentals/database-performance). As a bonus, can you think of a way to improve the performance of the app by reducing the number of database queries required?
+
 ### Bonus: MOAR CRUD APPZ
 
 If you finish your users / messages / tags app and want to build something else, try to create an app that allows you to perform CRUD on employees and departments for a company. A department can have many employees, and an employee can belong to many departments.

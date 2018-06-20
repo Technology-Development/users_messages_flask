@@ -9,6 +9,26 @@
         <input type="text" class="form-control" id="content" name="content" placeholder="What do you want your message to be?" value="{{ message.content }}">
       </div>
     </div>
+    <div class="form-check">
+      <p>Tags</p>
+      {% for tag in tags %}
+        <div>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value="{{ tag.id }}"
+            id="tag_{{ tag.id }}"
+            name="tags"
+            {% if tag in message.tags %}
+              checked
+            {% endif %}
+          >
+          <label class="form-check-label" for="tag_{{ tag.id }}">
+            <p class="badge badge-pill badge-warning">{{ tag.name }}</p>
+          </label>
+        </div>
+      {% endfor %}
+    </div>
     <div class="form-group row">
       <div class="ml-auto mr-3">
         <a href="{{ url_for('messages_index', user_id=message.user.id) }}" class="btn btn-info">Go back to message list</a>
