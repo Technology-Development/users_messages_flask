@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Messages tagged with {{ tag.name }}</h1>
+  {% for message in tag.messages %}
+    <div class="card mb-5">
+      <div class="card-body">
+        <a href="{{ url_for('messages_show', message_id=message.id) }}">{{ message.content }}</a> - <small><em>{{ message.user.first_name}} {{message.user.last_name}}</em></small>
+      </div>
+    </div>
+  {% endfor %}
+  <div class="d-flex justify-content-end">
+    <a href="{{ url_for('tags_index') }}" class="btn btn-info mr-2">Go back to tag list</a>
+    <a href="{{url_for('tags_edit', tag_id=tag.id)}}" class="btn btn-success mr-2">Edit</a>
+    <form class="delete-btn" action="{{url_for('tags_show', tag_id=tag.id)}}?_method=DELETE" method="POST">
+      <input type="submit" class="btn btn-danger" value="Delete"/>
+    </form>
+  </div>
+{% endblock %}

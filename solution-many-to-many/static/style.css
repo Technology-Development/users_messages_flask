@@ -1,0 +1,11 @@
+.delete-btn {
+  display: inline;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.user-photo {
+  width: 100%;
+}

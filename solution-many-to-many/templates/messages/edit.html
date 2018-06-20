@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Edit this message!</h1>
+  <form method="POST" action="{{url_for('messages_show', message_id=message.id)}}?_method=PATCH">
+    <div class="form-group row">
+      <label for="content" class="col-sm-2 col-form-label d-flex align-items-center">Message Content</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="content" name="content" placeholder="What do you want your message to be?" value="{{ message.content }}">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="ml-auto mr-3">
+        <a href="{{ url_for('messages_index', user_id=message.user.id) }}" class="btn btn-info">Go back to message list</a>
+        <button type="submit" class="btn btn-success">Edit this message for {{ message.user.first_name }} {{ message.user.last_name }}</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}
+

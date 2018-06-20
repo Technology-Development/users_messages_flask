@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Edit a tag</h1>
+  <form method="POST" action="{{url_for('tags_show', tag_id=tag.id)}}?_method=PATCH">
+    <div class="form-group row">
+      <label for="name" class="col-sm-2 col-form-label d-flex align-items-center">Name</label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="name" name="name" placeholder="Enter a name for the tag" value="{{ tag.name }}">
+      </div>
+    </div>
+    <div class="form-check">
+      <p>Messages</p>
+      {% for message in messages %}
+        <div>
+          <input 
+            class="form-check-input"
+            type="checkbox"
+            value="{{ message.id }}"
+            id="message_{{ message.id }}"
+            name="messages"
+            {% if message in tag.messages %}
+              checked
+            {% endif %}
+          >
+          <label class="form-check-label" for="message_{{ message.id }}">
+            "{{ message.content }}" - <small>{{ message.user.first_name }} {{ message.user.last_name }}</small>
+          </label>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="form-group row">
+      <div class="ml-auto mr-3">
+        <a href="{{ url_for('tags_index') }}" class="btn btn-info">Go back to tag list</a>
+        <button type="submit" class="btn btn-success">Edit this tag</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}
