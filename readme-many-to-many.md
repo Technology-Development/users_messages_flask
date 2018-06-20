@@ -7,14 +7,12 @@ Add another resource to your users and messages application! Create a resource f
 1.  You should be able to create full CRUD on tags.
 2.  When you create a message, you should be able to add existing tags to it.
 3.  When you edit a message, you should be able to modify the tags associated to it.
-4.  When you create a tag, you should be able to add existing messages to it.
-5.  When you edit a tag, you should be able to modify the messages associated to it.
+4.  (_Bonus_) When you edit a message, the edit form should pre-populate the list of tags with existing tags for that message already checked.
+5.  (_Bonus_) When you create a tag, you should be able to add existing messages to it.
+6.  (_Bonus_) When you edit a tag, you should be able to modify the messages associated to it. Messages that are currently assigned to the tag should be automatically checked in the form.
+7.  (_Bonus_ - Database performance ) If you add a bunch of data to the model solution, you should see that some pages require a lot of database querying in order to render. This means that the app probably won't scale very well as the database grows.
 
-### Bonus: Database performance
-
-If you add a bunch of data to the model solution, you should see that some pages require a lot of database querying in order to render. This means that the app probably won't scale very well as the database grows.
-
-The underlying issue here is related to a family of problems known as _N + 1 query problems_. You can read a bit about these issues [here](https://www.rithmschool.com/courses/flask-fundamentals/database-performance). As a bonus, can you think of a way to improve the performance of the app by reducing the number of database queries required?
+    The underlying issue here is related to a family of problems known as _N + 1 query problems_. You can read a bit about these issues [here](https://www.rithmschool.com/courses/flask-fundamentals/database-performance). As a bonus, can you think of a way to improve the performance of the app by reducing the number of database queries required?
 
 ### Bonus: MOAR CRUD APPZ
 
