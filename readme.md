@@ -1,3 +1,6 @@
+NOTE: this exercise has been moved into our private monorepo, curric, as exercises/flask-blogly
+
+
 # Users Messages App
 
 This repository contains two assignments for building CRUD apps in Flask. For more details, check out one of the other readmes:
